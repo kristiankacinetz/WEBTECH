@@ -28,10 +28,7 @@
    border: 1px solid black;
    padding: 5px;
  }
- table, th, td {
-   border: 1px solid black;
-   padding: 5px;
- }
+
 </style>
 </head>
 <body>
