@@ -45,7 +45,7 @@ if(isset($_POST['btn-login']))
 
   if($row['id_role'] == 1){
     $_SESSION['user'] = $row['id'];
-    header("Location: admin.php");
+    header("Location: admin.php?id=".$row['id_person']."");
   }
 
   
@@ -71,7 +71,7 @@ else
     </header>
     <div id="login-form">
       <form method="post" action = "<?php $_PHP_SELF ?>">
-        <table>
+        <table id="loginTab">
           <tr>
             <td><input type="text" name="login" placeholder="Your Login" required /></td>
           </tr>
