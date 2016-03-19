@@ -2,9 +2,10 @@
 <html>
 <head>
      <meta charset = "utf-8">
-     <title>Tim</title>
+     <title>Kapitan</title>
      <link rel="stylesheet" type="text/css" href="css/zadanie2_wt2.css">
      <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
+     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
      <style>
           table, th, td {
                border: 1px solid black;
@@ -16,7 +17,7 @@
 
      <section>
           <header>
-              <h1>Tím</h1>
+              <h1>Kapitan</h1>
          </header>
          <div id="tabulky">
           <form method="post" action = "<?php $_PHP_SELF ?>">
@@ -114,7 +115,7 @@ if ($body->num_rows > 0) {
 
            }
 
-           echo "<tr><td><button type='submit' name='btn-login' disabled>Submit</button> Uz si hlasoval</td></tr></tr>";
+           echo "<tr><td>Uz si hlasoval</td></tr></tr>";
            echo "</table>";
            echo "</form>";
 }else{
@@ -142,6 +143,15 @@ if ($body->num_rows > 0) {
 
     $conn->close();
     ?>  
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    setTimeout(function(){
+      $('body').load('captain.php?team=<?php echo $team ?>&captain=<?php echo $id_captain ?>')
+    }, 2000);
+  });
+</script>
 
 </div>
          <a href="logout.php?logout">odhlas</a>

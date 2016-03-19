@@ -55,7 +55,6 @@
       <th>
         Status
       </th>
-
     </tr>
 
 
@@ -79,7 +78,9 @@
 
 
 
-$bool=0;
+    $disabledBtn=0;
+
+
     if ($result->num_rows > 0) {
 
      while($row = $result->fetch_assoc()) {
@@ -97,16 +98,14 @@ $bool=0;
      else {
        echo "<td>Nedefinovane</td></td>";
      }
-    // echo $row["ID"];
-    // echo $id;
-    // echo $row["Accept"];
+    
      if($row["ID"]==$id && ($row["Accept"]=="S" || $row["Accept"]=="N" )){
-         $bool=1;
+         $disabledBtn=1;
      }
 
    }
 
-    if ($bool==1){
+    if ($disabledBtn==1){
    echo "<tr><td><button type='submit' class='btns' name='agree' disabled>Suhlasim</button> <button type='submit' class='btns' name='disagree' disabled>Nesuhlasim</button></td></tr></td>";
     }else {
           echo "<tr><td><button type='submit' class='btns' name='agree' >Suhlasim</button> <button type='submit' class='btns' name='disagree'>Nesuhlasim</button></td></tr></td>";
