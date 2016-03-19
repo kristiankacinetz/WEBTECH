@@ -62,7 +62,10 @@
     <?php
 
     include 'config.php';
-   
+   session_start();
+       if (!isset($_SESSION['admin'])){
+              header("Location: index.php");
+          }
 
 
     $sqlTeam1 = "SELECT p1.name AS Meno, p1.surname AS Priezvisko, p1.team AS Tim, p1.id_person AS ID, p3.body AS Body, p3.accept AS Accept FROM `OSOBY` AS p1, `HODNOTENIA` AS p2, `BODY` AS p3 WHERE p1.team='1' AND p1.team = p2.team AND p3.id_osoba = p1.id_person";

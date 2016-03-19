@@ -11,13 +11,9 @@
 session_start();
 include 'config.php';
 
-if(isset($_SESSION['user'])!="" && isset($_SESSION['captain'])==1)
-{
- header("Location: captain.php");
-}
-elseif (isset($_SESSION['user'])!="") {
-  header("Location: team.php");
-}
+
+
+
 
 if(isset($_POST['btn-login']))
 {
@@ -32,15 +28,18 @@ if(isset($_POST['btn-login']))
 
  if($row['passwd']==$upass)
  {
+     if($row['id_role']==1){
+          $_SESSION['admin'] = $row['id_role'];
+     }
 
   if($row['captain'] == 1){
-    $_SESSION['user'] = $row['id'];
+    $_SESSION['user'] = $row['id_person'];
     $_SESSION['captain'] = $row['captain'];
-    header("Location: captain.php?team=".$row['team']."");
+    header("Location: captain.php?team=".$row['team']."&captain=".$row['id_person']."");
    
   }
   else{
-     $_SESSION['user'] = $row['id'];
+     $_SESSION['user'] = $row['id_person'];
     header("Location: team.php?team=".$row['team']."&id=".$row['id_person']."");
   }
 
