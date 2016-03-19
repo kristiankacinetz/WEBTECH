@@ -62,6 +62,10 @@
     <?php
 
     include 'config.php';
+    session_start();
+      if (!isset($_SESSION['user'])){
+              header("Location:index.php");
+          }
     $team = $_GET['team'];
     $id = $_GET['id'];
 
@@ -75,26 +79,38 @@
 
 
 
-
+$bool=0;
     if ($result->num_rows > 0) {
 
      while($row = $result->fetch_assoc()) {
       echo "<tr><td>" . $row['Meno']. "</td><td>" . $row["Priezvisko"]. "</td><td>" . $row["Tim"]. "</td><td>" . $row["Body"] . "</td>";
         //ci uz je schvalena v databaze 
       if ($row["Accept"] == 'S') {
+         
        echo "<td>Suhlas</td></td>";
      }
      elseif ($row["Accept"] == 'N') {
+        
        echo "<td>Nesuhlas</td></td>";
      }
+
      else {
        echo "<td>Nedefinovane</td></td>";
+     }
+    // echo $row["ID"];
+    // echo $id;
+    // echo $row["Accept"];
+     if($row["ID"]==$id && ($row["Accept"]=="S" || $row["Accept"]=="N" )){
+         $bool=1;
      }
 
    }
 
-
-   echo "<tr><td><button type='submit' class='btns' name='agree'>Suhlasim</button> <button type='submit' class='btns' name='disagree'>Nesuhlasim</button></td></tr></td>";
+    if ($bool==1){
+   echo "<tr><td><button type='submit' class='btns' name='agree' disabled>Suhlasim</button> <button type='submit' class='btns' name='disagree' disabled>Nesuhlasim</button></td></tr></td>";
+    }else {
+          echo "<tr><td><button type='submit' class='btns' name='agree' >Suhlasim</button> <button type='submit' class='btns' name='disagree'>Nesuhlasim</button></td></tr></td>";
+    }
    echo "</table>";
    echo "</form>";
  } else {
@@ -158,6 +174,7 @@ $conn->close();
 </script>
 
 </div>
+         <a href="logout.php?logout">odhlas</a>
 </section>
 <footer>
  <p><small>Copyright 2015 Kristián Kačinetz</small></p>
